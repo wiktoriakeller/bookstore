@@ -1,5 +1,5 @@
-﻿using Bookstore.Core.Dtos.Books;
-using Bookstore.Core.Entities;
+﻿using Bookstore.Core.Common;
+using Bookstore.Core.Dtos.Books;
 using FluentValidation;
 
 namespace Bookstore.BusinessLogic.Common.Validators.Books

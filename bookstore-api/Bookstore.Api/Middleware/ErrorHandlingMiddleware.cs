@@ -1,7 +1,7 @@
 ﻿using Bookstore.BusinessLogic.Exceptions;
 using System.Text.Json;
 
-namespace NotesApp.Services.Middleware
+namespace Bookstore.Api.Middleware
 {
     public class ErrorHandlingMiddleware
     {

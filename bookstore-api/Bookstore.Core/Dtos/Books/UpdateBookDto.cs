@@ -1,4 +1,4 @@
-﻿using Bookstore.Core.Entities;
+﻿using Bookstore.Core.Common;
 
 namespace Bookstore.Core.Dtos.Books
 {

@@ -1,4 +1,6 @@
-﻿namespace Bookstore.Core.Entities
+﻿using Bookstore.Core.Common;
+
+namespace Bookstore.Core.Entities
 {
     public class Book
     {

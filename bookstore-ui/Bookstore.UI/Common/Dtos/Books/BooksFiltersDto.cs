@@ -1,4 +1,4 @@
-﻿using Bookstore.Core.Common;
+﻿using Bookstore.UI.Common;
 
 namespace Bookstore.Core.Dtos.Books
 {

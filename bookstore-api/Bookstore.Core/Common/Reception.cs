@@ -1,4 +1,4 @@
-﻿namespace Bookstore.Core.Entities
+﻿namespace Bookstore.Core.Common
 {
     public enum Reception
     {

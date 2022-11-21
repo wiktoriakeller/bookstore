@@ -1,5 +1,5 @@
-﻿using Bookstore.Core.Dtos.Publishers;
-using Bookstore.Core.Entities;
+﻿using Bookstore.Core.Common;
+using Bookstore.Core.Dtos.Publishers;
 
 namespace Bookstore.Core.Dtos.Books
 {

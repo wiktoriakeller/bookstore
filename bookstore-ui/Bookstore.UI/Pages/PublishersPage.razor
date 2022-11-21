@@ -1,0 +1,45 @@
+﻿@page "/publishers"
+@using Bookstore.Core.Dtos.Publishers;
+@using Bookstore.UI.ApiInterfaces;
+
+@if (!_publishers.Any())
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@_publishers" Hover="true" Bordered="true" Dense="false" Breakpoint="Breakpoint.Sm">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Publishers</MudText>
+            <MudSpacer />
+            <MudTextField 
+                @bind-Value="@_publishersNameFilter" 
+                Placeholder="Search"
+                Adornment="Adornment.Start" 
+                AdornmentIcon="@Icons.Material.Filled.Search" 
+                IconSize="Size.Medium" 
+                Class="mt-0">
+            </MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Name</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    [Inject]
+    private IPublishersApi _publishersApi { get; set; }
+
+    private IEnumerable<PublisherDto> _publishers = new List<PublisherDto>();
+    private string _publishersNameFilter = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _publishers = await _publishersApi.GetAllPublishers();
+        StateHasChanged();
+    }
+}

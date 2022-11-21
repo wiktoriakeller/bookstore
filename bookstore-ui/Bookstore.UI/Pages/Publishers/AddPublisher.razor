@@ -1,0 +1,18 @@
+﻿@using Bookstore.Core.Dtos.Publishers;
+@using Bookstore.UI.Pages.Dialogs
+@inherits DialogBasePage
+
+<MudDialog>
+    <DialogContent>
+        <MudForm>
+            <MudTextField
+                T="string"
+                Label="Name"
+                @bind-Value="_addPublisher.Name"
+                Variant="Variant.Outlined"
+                Immediate="true"
+            />
+        </MudForm>
+    </DialogContent>
+</MudDialog>
+<AddDialog EntityName="Publisher" OnSubmit="@(async () => await Submit())" OnCancel="Cancel"/>

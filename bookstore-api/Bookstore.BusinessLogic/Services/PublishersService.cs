@@ -39,7 +39,7 @@ namespace Bookstore.BusinessLogic.Services
         public async Task<Guid> AddPublisher(AddPublisherDto addPublisherDto)
         {
             var allPublishers = _publishersRepository.GetAll();
-            var publisherName = addPublisherDto.Name;
+            var publisherName = addPublisherDto.Name.ToLower();
 
             if (allPublishers.Any(p => p.Name.ToLower() == publisherName))
             {

@@ -4,11 +4,11 @@ namespace Bookstore.Core.Dtos.Books
 {
     public class AddBookDto
     {
-        public string Title { get; init; }
-        public string Author { get; init; }
-        public string Description { get; init; }
-        public string Genre { get; init; }
-        public Reception Reception { get; init; }
-        public Guid PublisherId { get; init; }
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Description { get; set; }
+        public string Genre { get; set; }
+        public Reception Reception { get; set; }
+        public Guid PublisherId { get; set; }
     }
 }

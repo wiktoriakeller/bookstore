@@ -1,0 +1,19 @@
+﻿@code {
+    [Inject]
+    protected ISnackbar _snackbar { get; set; }
+
+    [CascadingParameter]
+    protected MudDialogInstance _mudDialog { get; set; }
+
+    protected void AddSnackbarMessage(bool success, string message)
+    {
+        var severity = success ? Severity.Success : Severity.Error;
+
+        _snackbar.Add(message, severity);
+
+        if(success)
+        {
+            _mudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+}

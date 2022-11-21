@@ -24,7 +24,7 @@ namespace Bookstore.Api.Middleware
                 var response = context.Response;
                 response.StatusCode = statusCode;
                 response.ContentType = "application/json";
-                var result = JsonSerializer.Serialize(new { errors = e?.Message });
+                var result = JsonSerializer.Serialize(new { Errors = e?.Message });
                 await response.WriteAsync(result);
             }
         }

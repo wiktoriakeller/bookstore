@@ -1,10 +1,10 @@
-﻿using Bookstore.DataAccess.Repositories;
+﻿using Bookstore.DataAccessSQL.Repositories;
 using Bookstore.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Bookstore.DataAccess.Extensions
+namespace Bookstore.DataAccessSQL.Extensions
 {
     public static class ConfigureServicesExtension
     {
@@ -17,7 +17,6 @@ namespace Bookstore.DataAccess.Extensions
 
             services.AddScoped<IBooksRepository, BooksRepository>();
             services.AddScoped<IPublishersRepository, PublishersRepository>();
-            services.AddScoped<IGenresRepository, GenresRepository>();
             return services;
         }
     }

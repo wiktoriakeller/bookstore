@@ -5,7 +5,7 @@ VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.BusinessLogic", "Bookstore.BusinessLogic\Bookstore.BusinessLogic.csproj", "{284610A6-8CF7-41E4-ACD3-B46C15F854E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.DataAccess", "Bookstore.DataAccess\Bookstore.DataAccess.csproj", "{99D6E43D-4FAF-4992-9C50-20A78303B2B7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.DataAccessSQL", "Bookstore.DataAccess\Bookstore.DataAccessSQL.csproj", "{99D6E43D-4FAF-4992-9C50-20A78303B2B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Core", "Bookstore.Core\Bookstore.Core.csproj", "{45A32F66-CDD1-4C71-899E-C531F014952E}"
 EndProject

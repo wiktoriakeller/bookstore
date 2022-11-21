@@ -24,7 +24,8 @@ namespace Bookstore.BusinessLogic.Common.Validators.Books
                 .MaximumLength(1000);
 
             RuleFor(x => x.Reception)
-                .IsInEnum();
+                .IsInEnum()
+                .WithMessage("Specified reception does not exist");
         }
     }
 }

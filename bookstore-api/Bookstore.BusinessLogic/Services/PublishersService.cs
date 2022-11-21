@@ -24,6 +24,18 @@ namespace Bookstore.BusinessLogic.Services
             return _mapper.Map<IEnumerable<PublisherDto>>(allPublishers);
         }
 
+        public IEnumerable<PublisherDto> FilterPublishers(FilterPublishersDto filterPublishersDto)
+        {
+            var search = string.Empty;
+            if (!string.IsNullOrWhiteSpace(filterPublishersDto.PublisherNameFilter))
+            {
+                search = filterPublishersDto.PublisherNameFilter.ToLower();
+            }
+
+            var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().Contains(search));
+            return _mapper.Map<IEnumerable<PublisherDto>>(filteredPublishers);
+        }
+
         public async Task<Guid> AddPublisher(AddPublisherDto addPublisherDto)
         {
             var allPublishers = _publishersRepository.GetAll();

@@ -6,6 +6,8 @@ namespace Bookstore.Interfaces.Services
     {
         IEnumerable<PublisherDto> GetAllPublishers();
 
+        IEnumerable<PublisherDto> FilterPublishers(FilterPublishersDto filterPublishersDto);
+
         Task<Guid> AddPublisher(AddPublisherDto addPublisherDto);
 
         Task UpdatePublisher(UpdatePublisherDto updatePublisherDto);

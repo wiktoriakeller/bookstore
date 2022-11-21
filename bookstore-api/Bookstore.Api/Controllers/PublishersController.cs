@@ -16,9 +16,16 @@ namespace Bookstore.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPublishers()
+        public IActionResult GetAllPublishers()
         {
             return Ok(_publishersService.GetAllPublishers());
+        }
+
+        [HttpGet("filters")]
+        public IActionResult GetFilteredPublishers([FromQuery] string? publishersNameFilter)
+        {
+            var filterPublishersDto = new FilterPublishersDto { PublisherNameFilter = publishersNameFilter };
+            return Ok(_publishersService.FilterPublishers(filterPublishersDto));
         }
 
         [HttpPost]

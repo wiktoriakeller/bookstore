@@ -1,0 +1,71 @@
+﻿@page "/publishers"
+@using Bookstore.Core.Dtos.Publishers;
+@using Bookstore.UI.ApiInterfaces;
+
+@if (_isLoading)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@_publishers" Hover="true" Bordered="false" Dense="false" Breakpoint="Breakpoint.Xs">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6">Publishers</MudText>
+            <MudSpacer />
+            <MudTextField 
+                @bind-Value="_publishersNameFilter" 
+                Placeholder="Search name..."
+                Adornment="Adornment.Start" 
+                AdornmentIcon="@Icons.Material.Filled.Search" 
+                IconSize="Size.Medium" 
+                Class="mt-0"
+                OnKeyDown="FilterPublishers"
+                Immediate="true"
+            >
+            </MudTextField>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Nr</MudTh>
+            <MudTh>
+                <MudTableSortLabel 
+                    InitialDirection="SortDirection.Ascending"
+                    SortBy="new Func<PublisherDto, object>(p => p.Name)">
+                        Name
+                    </MudTableSortLabel>
+            </MudTh>        
+         </HeaderContent>
+        <RowTemplate>
+            <MudTd>@GetRowNumber(context)</MudTd>
+            <MudTd DataLabel="Name">@context.Name</MudTd>
+        </RowTemplate>
+    </MudTable>
+}
+
+@code {
+    [Inject]
+    private IPublishersApi _publishersApi { get; set; }
+
+    private IEnumerable<PublisherDto> _publishers = Enumerable.Empty<PublisherDto>();
+    private string _publishersNameFilter = string.Empty;
+    private bool _isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _publishers = await _publishersApi.GetAllPublishers();
+        _isLoading = false;
+        StateHasChanged();
+    }
+
+    private async Task FilterPublishers(KeyboardEventArgs e)
+    {
+        if(e.Key == "Enter")
+        {
+            var filtered = await _publishersApi.GetFilteredPublishers(_publishersNameFilter);
+            _publishers = filtered ?? Enumerable.Empty<PublisherDto>();
+            _publishersNameFilter = string.Empty;
+            StateHasChanged();
+        }
+    }
+
+    private int? GetRowNumber(PublisherDto element) => _publishers?.TakeWhile(p => p != element).Count();
+}

@@ -6,6 +6,5 @@ namespace Bookstore.Core.Dtos.Publishers
     {
         public Guid Id { get; init; }
         public string Name { get; init; }
-        public ICollection<BookDto> Books { get; init; }
     }
 }

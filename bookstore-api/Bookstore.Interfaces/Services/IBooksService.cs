@@ -6,7 +6,9 @@ namespace Bookstore.Interfaces.Services
     {
         IEnumerable<BookDto> GetAllBooks();
 
-        Task AddBook(AddBookDto addBookDto);
+        IEnumerable<BookDto> FilterBooks(BooksFiltersDto booksFiltersDto);
+
+        Task<Guid> AddBook(AddBookDto addBookDto);
 
         Task UpdateBook(UpdateBookDto updateBookDto);
 

@@ -11,6 +11,7 @@ namespace Bookstore.BusinessLogic.Extensions
         public static IServiceCollection AddBusinessLogic(this IServiceCollection services)
         {
             services.AddScoped<IPublishersService, PublishersService>();
+            services.AddScoped<IBooksService, BooksService>();
 
             services.AddFluentValidationAutoValidation();
             services.AddAutoMapper(typeof(ConfigureServicesExtension).Assembly);

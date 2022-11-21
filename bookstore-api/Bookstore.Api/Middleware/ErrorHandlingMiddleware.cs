@@ -34,6 +34,8 @@ namespace NotesApp.Services.Middleware
             PublisherNotFoundException => StatusCodes.Status404NotFound,
             PublisherHasBooksException => StatusCodes.Status400BadRequest,
             NotUniquePublisherException => StatusCodes.Status400BadRequest,
+            BookNotFoundException => StatusCodes.Status404NotFound,
+            NotUniqueBookException => StatusCodes.Status400BadRequest,
             _ => StatusCodes.Status500InternalServerError
         };
     }

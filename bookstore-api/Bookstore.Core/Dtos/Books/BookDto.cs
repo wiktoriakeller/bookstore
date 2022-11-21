@@ -11,6 +11,7 @@ namespace Bookstore.Core.Dtos.Books
         public string Description { get; init; }
         public string Genre { get; init; }
         public Reception Reception { get; init; }
+        public Guid PublisherId { get; init; }
         public PublisherDto Publisher { get; init; }
     }
 }

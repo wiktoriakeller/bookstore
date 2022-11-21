@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Bookstore.BusinessLogic.Common.Validators.Publishers
 {
-    public class AddPublisherValidator : AbstractValidator<AddPublisherDto>
+    public class UpdatePublisherDtoValidator : AbstractValidator<UpdatePublisherDto>
     {
-        public AddPublisherValidator()
+        public UpdatePublisherDtoValidator()
         {
             RuleFor(x => x.Name)
                 .NotEmpty()

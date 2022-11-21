@@ -24,12 +24,12 @@ namespace Bookstore.BusinessLogic.Services
             return _mapper.Map<IEnumerable<PublisherDto>>(allPublishers);
         }
 
-        public IEnumerable<PublisherDto> FilterPublishers(FilterPublishersDto filterPublishersDto)
+        public IEnumerable<PublisherDto> FilterPublishers(PublishersFiltersDto publishersFiltersDto)
         {
             var search = string.Empty;
-            if (!string.IsNullOrWhiteSpace(filterPublishersDto.PublisherNameFilter))
+            if (!string.IsNullOrWhiteSpace(publishersFiltersDto.NameFilter))
             {
-                search = filterPublishersDto.PublisherNameFilter.ToLower();
+                search = publishersFiltersDto.NameFilter.ToLower();
             }
 
             var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().Contains(search));
@@ -39,8 +39,9 @@ namespace Bookstore.BusinessLogic.Services
         public async Task<Guid> AddPublisher(AddPublisherDto addPublisherDto)
         {
             var allPublishers = _publishersRepository.GetAll();
+            var publisherName = addPublisherDto.Name;
 
-            if (allPublishers.Any(p => p.Name == addPublisherDto.Name))
+            if (allPublishers.Any(p => p.Name.ToLower() == publisherName))
             {
                 throw new NotUniquePublisherException($"Name {addPublisherDto.Name} is already taken by another publisher");
             }

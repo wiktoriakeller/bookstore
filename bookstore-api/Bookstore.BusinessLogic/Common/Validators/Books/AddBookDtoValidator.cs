@@ -19,10 +19,6 @@ namespace Bookstore.BusinessLogic.Common.Validators.Books
                 .NotEmpty()
                 .MaximumLength(500);
 
-            RuleFor(x => x.Description)
-                .NotEmpty()
-                .MaximumLength(1000);
-
             RuleFor(x => x.Reception)
                 .IsInEnum()
                 .WithMessage("Specified reception does not exist");

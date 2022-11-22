@@ -24,9 +24,6 @@ namespace Bookstore.DataAccessSQL
                 eb.Property(c => c.Author)
                     .HasMaxLength(500);
 
-                eb.Property(c => c.Description)
-                    .HasMaxLength(1000);
-
                 eb.Property(c => c.Genre)
                     .HasMaxLength(200);
             });

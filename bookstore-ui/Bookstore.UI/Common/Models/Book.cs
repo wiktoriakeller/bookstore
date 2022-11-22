@@ -1,9 +1,8 @@
-﻿using Bookstore.Core.Dtos.Publishers;
-using Bookstore.UI.Common;
+﻿using Bookstore.Core.Models;
 
-namespace Bookstore.Core.Dtos.Books
+namespace Bookstore.UI.Common.Models
 {
-    public class BookDto
+    public class Book
     {
         public Guid Id { get; init; }
         public string Title { get; init; }
@@ -12,6 +11,6 @@ namespace Bookstore.Core.Dtos.Books
         public string Genre { get; init; }
         public Reception Reception { get; init; }
         public Guid PublisherId { get; init; }
-        public PublisherDto Publisher { get; init; }
+        public Publisher Publisher { get; init; }
     }
 }

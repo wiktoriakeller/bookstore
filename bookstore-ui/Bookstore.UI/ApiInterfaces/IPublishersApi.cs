@@ -1,4 +1,5 @@
 ﻿using Bookstore.Core.Dtos.Publishers;
+using Bookstore.Core.Models;
 using Refit;
 
 namespace Bookstore.UI.ApiInterfaces
@@ -6,10 +7,10 @@ namespace Bookstore.UI.ApiInterfaces
     public interface IPublishersApi
     {
         [Get("/api/v1/publishers/")]
-        Task<IEnumerable<PublisherDto>> GetAllPublishers();
+        Task<IEnumerable<Publisher>> GetAllPublishers();
 
         [Get("/api/v1/publishers/filters?publishersNameFilter={publishersNameFilter}")]
-        Task<IEnumerable<PublisherDto>> GetFilteredPublishers(string? publishersNameFilter);
+        Task<IEnumerable<Publisher>> GetFilteredPublishers(string? publishersNameFilter);
 
         [Post("/api/v1/publishers/")]
         Task AddPublisher([Body] AddPublisherDto addPublisherDto);

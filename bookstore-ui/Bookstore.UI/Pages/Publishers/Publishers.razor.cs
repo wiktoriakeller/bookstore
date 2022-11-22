@@ -1,4 +1,4 @@
-﻿using Bookstore.Core.Dtos.Publishers;
+﻿using Bookstore.Core.Models;
 using Bookstore.UI.ApiInterfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -14,7 +14,7 @@ namespace Bookstore.UI.Pages.Publishers
         [Inject]
         private IDialogService _dialogService { get; set; }
 
-        private IEnumerable<PublisherDto> _publishers = Enumerable.Empty<PublisherDto>();
+        private IEnumerable<Publisher> _publishers = Enumerable.Empty<Publisher>();
         private string _publishersNameFilter = string.Empty;
         private bool _isLoading = true;
 
@@ -30,7 +30,7 @@ namespace Bookstore.UI.Pages.Publishers
             if (e.Key == "Enter")
             {
                 var filtered = await _publishersApi.GetFilteredPublishers(_publishersNameFilter);
-                _publishers = filtered ?? Enumerable.Empty<PublisherDto>();
+                _publishers = filtered ?? Enumerable.Empty<Publisher>();
                 _publishersNameFilter = string.Empty;
                 StateHasChanged();
             }
@@ -63,6 +63,6 @@ namespace Bookstore.UI.Pages.Publishers
             }
         }
 
-        private int? GetRowNumber(PublisherDto element) => _publishers?.TakeWhile(p => p != element).Count();
+        private int? GetRowNumber(Publisher element) => _publishers?.TakeWhile(p => p != element).Count();
     }
 }

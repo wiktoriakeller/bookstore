@@ -1,4 +1,4 @@
-﻿namespace Bookstore.UI.Common.Dtos
+﻿namespace Bookstore.UI.Common.Models
 {
     public class ErrorMessage
     {

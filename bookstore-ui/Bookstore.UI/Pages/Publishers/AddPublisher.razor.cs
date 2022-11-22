@@ -1,6 +1,7 @@
 ﻿using Bookstore.Core.Dtos.Publishers;
 using Bookstore.UI.ApiInterfaces;
-using Bookstore.UI.Common.Dtos;
+using Bookstore.UI.Common.Models;
+using Bookstore.UI.Common.Validators;
 using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using Refit;
@@ -13,28 +14,34 @@ namespace Bookstore.UI.Pages.Publishers
         [Inject]
         private IPublishersApi _publishersApi { get; set; }
 
+        [Inject]
+        private IFormValidator<AddPublisherDto> _validator { get; set; }
+
         private AddPublisherDto _addPublisher = new();
         private MudForm _form;
 
         private async Task Submit()
         {
-            bool success;
-            var message = "Added new publisher";
+            await _form.Validate();
 
-            try
+            if (_form.IsValid)
             {
-                await _publishersApi.AddPublisher(_addPublisher);
-                success = true;
-            }
-            catch (ApiException ex)
-            {
-                message = JsonSerializer.Deserialize<ErrorMessage>(ex.Content).Errors;
-                success = false;
-            }
+                bool success;
+                var message = "Added new publisher";
 
-            AddSnackbarMessage(success, message);
+                try
+                {
+                    await _publishersApi.AddPublisher(_addPublisher);
+                    success = true;
+                }
+                catch (ApiException ex)
+                {
+                    message = JsonSerializer.Deserialize<ErrorMessage>(ex.Content).Errors;
+                    success = false;
+                }
+
+                AddSnackbarMessage(success, message);
+            }
         }
-
-        private void Cancel() => _mudDialog.Cancel();
     }
 }

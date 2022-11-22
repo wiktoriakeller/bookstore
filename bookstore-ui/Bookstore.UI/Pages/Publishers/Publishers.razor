@@ -1,6 +1,5 @@
 ﻿@page "/publishers"
-@using Bookstore.Core.Dtos.Publishers;
-@using Bookstore.UI.ApiInterfaces;
+@using Bookstore.Core.Models;
 
 <style>
     .button-right {
@@ -45,7 +44,7 @@ else
             <MudTh>
                 <MudTableSortLabel 
                     InitialDirection="SortDirection.Ascending"
-                    SortBy="new Func<PublisherDto, object>(p => p.Name)">
+                    SortBy="new Func<Publisher, object>(p => p.Name)">
                         Name
                     </MudTableSortLabel>
             </MudTh>        

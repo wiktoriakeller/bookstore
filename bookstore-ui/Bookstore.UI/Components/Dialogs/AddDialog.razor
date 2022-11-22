@@ -1,4 +1,6 @@
-﻿ <MudDialog>
+﻿@inherits BaseDialog 
+
+<MudDialog>
      <TitleContent>
          <MudText Typo="Typo.h6" Align="Align.Center">
              Add @EntityName
@@ -6,24 +8,6 @@
      </TitleContent>
      <DialogActions>
          <MudButton Color="Color.Default" Variant="Variant.Filled" OnClick="@Cancel">Cancel</MudButton>
-         <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="@Submit">Save</MudButton>
+         <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="@Confirm">Save</MudButton>
      </DialogActions>
  </MudDialog>
-
-@code {
-    [CascadingParameter] 
-    private MudDialogInstance MudDialog { get; set; }
-
-    [Parameter] 
-    public string EntityName { get; set; } = string.Empty;
-
-    [Parameter] 
-    public EventCallback<bool> OnSubmit{ get; set; }
-
-    [Parameter] 
-    public EventCallback<bool> OnCancel { get; set; }
-
-    private async Task Submit() => await OnSubmit.InvokeAsync();
-    private async Task Cancel() => await OnCancel.InvokeAsync();
-}   
-

@@ -14,4 +14,4 @@
         </MudForm>
     </DialogContent>
 </MudDialog>
-<UpdateDialog EntityName="Publisher" OnSubmit="@(async () => await Submit())" OnCancel="Cancel"/>
+<UpdateDialog EntityName="Publisher" OnConfirm="@(async () => await Submit())" OnCancel="Cancel" />

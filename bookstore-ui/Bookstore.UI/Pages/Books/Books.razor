@@ -1,7 +1,62 @@
 ﻿@page "/"
 
-<h3>Books</h3>
+<style>
+    .align-right {
+        margin-right: auto;
+        margin-left: 20px;
+    }
+</style>
 
-@code {
-
+@if (_isLoading)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@_books" Hover="true" Bordered="false" Dense="false" Breakpoint="Breakpoint.Xs">
+        <ToolBarContent>
+            <MudText Typo="Typo.h6" Class="title">Books</MudText>
+            <MudSpacer />
+            <MudButton Variant="Variant.Outlined"
+                   EndIcon="@Icons.Outlined.Add"
+                   Color="Color.Info"
+                   Size="Size.Medium"
+                   Class="align-right"
+                   OnClick="OpenAddDialog">
+                <span class="button-text">Add</span>
+            </MudButton>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Nr</MudTh>
+            <MudTh>Title</MudTh>
+            <MudTh>Author</MudTh>
+            <MudTh>Publisher</MudTh>
+            <MudTh>Genre</MudTh>
+            <MudTh>Reception</MudTh>
+            <MudTh>Edit</MudTh>
+            <MudTh>Delete</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@GetRowNumber(context)</MudTd>
+            <MudTd DataLabel="Title">@context.Title</MudTd>
+            <MudTd DataLabel="Author">@context.Author</MudTd>
+            <MudTd DataLabel="Publisher">@context.Publisher.Name</MudTd>
+            <MudTd DataLabel="Genre">@context.Genre</MudTd>
+            <MudTd DataLabel="Reception">@context.Reception.ToString()</MudTd>
+            <MudTd DataLabel="Edit">
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit"
+                           Variant="Variant.Text"
+                           Color="Color.Info"
+                           Size="Size.Small"
+                           OnClick="@(async () => await OpenUpdateDialog(context))" />
+            </MudTd>
+            <MudTd DataLabel="Delete">
+                <MudIconButton Icon="@Icons.Material.Outlined.Delete"
+                           Variant="Variant.Text"
+                           Color="Color.Error"
+                           Size="Size.Small"
+                           OnClick="@(async () => await OpenDeleteDialog(context))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
 }

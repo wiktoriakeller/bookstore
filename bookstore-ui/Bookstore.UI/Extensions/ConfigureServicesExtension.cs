@@ -1,4 +1,5 @@
-﻿using Bookstore.Core.Dtos.Publishers;
+﻿using Bookstore.Core.Dtos.Books;
+using Bookstore.Core.Dtos.Publishers;
 using Bookstore.UI.ApiInterfaces;
 using Bookstore.UI.Common.Validators;
 using Bookstore.UI.Common.Validators.Publishers;
@@ -31,12 +32,15 @@ namespace Bookstore.UI.Extensions
         {
             var apiUrl = "https://localhost:44361";
             services.AddRefitClient<IPublishersApi>().ConfigureHttpClient(c => c.BaseAddress = new Uri(apiUrl));
+            services.AddRefitClient<IBooksApi>().ConfigureHttpClient(c => c.BaseAddress = new Uri(apiUrl));
         }
 
         private static void AddValidators(IServiceCollection services)
         {
             services.AddScoped<IFormValidator<AddPublisherDto>, AddPublisherDtoValidator>();
             services.AddScoped<IFormValidator<UpdatePublisherDto>, UpdatePublisherDtoValidator>();
+            services.AddScoped<IFormValidator<AddBookDto>, AddBookDtoValidator>();
+            services.AddScoped<IFormValidator<UpdateBookDto>, UpdateBookDtoValidator>();
             ValidatorOptions.Global.LanguageManager.Enabled = false;
         }
     }

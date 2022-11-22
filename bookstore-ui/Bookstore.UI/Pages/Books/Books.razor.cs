@@ -1,23 +1,26 @@
-﻿using Bookstore.Core.Dtos.Publishers;
+﻿using Bookstore.Core.Dtos.Books;
 using Bookstore.UI.ApiInterfaces;
 using Bookstore.UI.Common.Models;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 
-namespace Bookstore.UI.Pages.Publishers
+namespace Bookstore.UI.Pages.Books
 {
-    public partial class Publishers
+    public partial class Books
     {
+        [Inject]
+        private IBooksApi _booksApi { get; set; }
+
         [Inject]
         private IPublishersApi _publishersApi { get; set; }
 
         [Inject]
         private IDialogService _dialogService { get; set; }
 
-        private IEnumerable<Publisher> _publishers = Enumerable.Empty<Publisher>();
+        private IEnumerable<Book> _books = Enumerable.Empty<Book>();
 
-        private string _publishersNameFilter = string.Empty;
+        private IEnumerable<Publisher> _allPublishers = Enumerable.Empty<Publisher>();
 
         private bool _isLoading = true;
 
@@ -31,52 +34,59 @@ namespace Bookstore.UI.Pages.Publishers
 
         protected override async Task OnInitializedAsync()
         {
-            _publishers = await _publishersApi.GetAllPublishers();
+            _books = await _booksApi.GetAllBooks();
+            _allPublishers = await _publishersApi.GetAllPublishers();
             _isLoading = false;
             StateHasChanged();
         }
 
-        private async Task FilterPublishers(KeyboardEventArgs e)
+        private async Task FilterBooks(KeyboardEventArgs e)
         {
             if (e.Key == "Enter")
             {
-                var filtered = await _publishersApi.GetFilteredPublishers(_publishersNameFilter);
-                _publishers = filtered ?? Enumerable.Empty<Publisher>();
-                _publishersNameFilter = string.Empty;
                 StateHasChanged();
             }
         }
 
         private async Task OpenAddDialog()
         {
-            var parameters = new DialogParameters();
-            await ShowDialog<AddPublisher>("Add publisher", parameters, _dialogOptions);
+            var parameters = new DialogParameters
+            {
+                { "AllPublishers", _allPublishers }
+            };
+
+            await ShowDialog<AddBook>("Add book", parameters, _dialogOptions);
         }
 
-        private async Task OpenUpdateDialog(Publisher publisher)
+        private async Task OpenUpdateDialog(Book book)
         {
-            var selectedPublisher = new UpdatePublisherDto
+            var selectedBook = new UpdateBookDto
             {
-                Id = publisher.Id,
-                Name = publisher.Name
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author,
+                Genre = book.Genre,
+                Reception = book.Reception,
+                PublisherId = book.PublisherId,
             };
 
             var parameters = new DialogParameters
             {
-                { "SelectedPublisher", selectedPublisher }
+                { "SelectedBook", selectedBook },
+                { "AllPublishers", _allPublishers }
             };
 
-            await ShowDialog<UpdatePublisher>("Edit publisher", parameters, _dialogOptions);
+            await ShowDialog<UpdateBook>("Edit book", parameters, _dialogOptions);
         }
 
-        private async Task OpenDeleteDialog(Publisher publisher)
+        private async Task OpenDeleteDialog(Book book)
         {
             var parameters = new DialogParameters
             {
-                { "SelectedPublisheriD", publisher.Id }
+                { "SelectedBookId", book.Id }
             };
 
-            await ShowDialog<DeletePublisher>("Delete publisher", parameters, _dialogOptions);
+            await ShowDialog<DeleteBook>("Delete book", parameters, _dialogOptions);
         }
 
         private async Task ShowDialog<T>(string title, DialogParameters? parameters = null, DialogOptions? options = null)
@@ -87,11 +97,11 @@ namespace Bookstore.UI.Pages.Publishers
 
             if (!result.Cancelled)
             {
-                _publishers = await _publishersApi.GetAllPublishers();
+                _books = await _booksApi.GetAllBooks();
                 StateHasChanged();
             }
         }
 
-        private int? GetRowNumber(Publisher element) => _publishers?.TakeWhile(p => p != element).Count();
+        private int? GetRowNumber(Book element) => _books?.TakeWhile(p => p != element).Count();
     }
 }

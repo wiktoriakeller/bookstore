@@ -1,4 +1,4 @@
-﻿namespace Bookstore.Core.Models
+﻿namespace Bookstore.UI.Common.Models
 {
     public class Publisher
     {

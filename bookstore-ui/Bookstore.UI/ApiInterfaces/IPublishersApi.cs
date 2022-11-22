@@ -1,5 +1,5 @@
 ﻿using Bookstore.Core.Dtos.Publishers;
-using Bookstore.Core.Models;
+using Bookstore.UI.Common.Models;
 using Refit;
 
 namespace Bookstore.UI.ApiInterfaces

@@ -53,7 +53,8 @@ namespace Bookstore.BusinessLogic.Services
             }
 
             var allPublishers = _publishersRepository.GetAll();
-            if (!allPublishers.Any(p => p.Id == addBookDto.PublisherId))
+            var selectedPublisher = allPublishers.FirstOrDefault(p => p.Id == addBookDto.PublisherId);
+            if (selectedPublisher is null)
             {
                 throw new PublisherNotFoundException($"Specified publisher does not exist");
             }

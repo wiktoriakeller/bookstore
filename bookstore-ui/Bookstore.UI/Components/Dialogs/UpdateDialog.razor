@@ -1,15 +1,21 @@
-﻿ <MudDialog>
-     <TitleContent>
+﻿<style>
+    .button-left {
+        margin-right: auto;
+        margin-left: 1%;
+    }
+</style>
+
+<MudDialog>
+    <TitleContent>
          <MudText Typo="Typo.h6" Align="Align.Center">
-             <MudIcon Class="mr-3 mb-n1"/>
-             Add @EntityName
+             Edit @EntityName
          </MudText>
      </TitleContent>
      <DialogActions>
-         <MudButton Color="Color.Default" Variant="Variant.Filled" OnClick="@Cancel">Cancel</MudButton>
-         <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="@Submit">Save</MudButton>
-     </DialogActions>
- </MudDialog>
+        <MudButton Color="Color.Default" Variant="Variant.Filled" OnClick="@Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Info" Variant="Variant.Filled" OnClick="@Submit">Save</MudButton>
+    </DialogActions>
+</MudDialog>  
 
 @code {
     [CascadingParameter] 
@@ -25,6 +31,6 @@
     public EventCallback<bool> OnCancel { get; set; }
 
     private async Task Submit() => await OnSubmit.InvokeAsync();
-    private async Task Cancel() => await OnCancel.InvokeAsync();
-}   
 
+    private async Task Cancel() => await OnCancel.InvokeAsync();
+}

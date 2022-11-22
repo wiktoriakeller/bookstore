@@ -2,7 +2,7 @@
 {
     public class UpdatePublisherDto
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; init; }
         public string Name { get; set; }
     }
 }

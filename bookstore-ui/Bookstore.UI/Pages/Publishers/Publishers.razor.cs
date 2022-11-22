@@ -1,4 +1,5 @@
-﻿using Bookstore.Core.Models;
+﻿using Bookstore.Core.Dtos.Publishers;
+using Bookstore.Core.Models;
 using Bookstore.UI.ApiInterfaces;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -15,8 +16,18 @@ namespace Bookstore.UI.Pages.Publishers
         private IDialogService _dialogService { get; set; }
 
         private IEnumerable<Publisher> _publishers = Enumerable.Empty<Publisher>();
+
         private string _publishersNameFilter = string.Empty;
+
         private bool _isLoading = true;
+
+        private DialogOptions _dialogOptions = new DialogOptions
+        {
+            MaxWidth = MaxWidth.Small,
+            FullWidth = true,
+            CloseOnEscapeKey = true,
+            Position = DialogPosition.Center
+        };
 
         protected override async Task OnInitializedAsync()
         {
@@ -38,16 +49,34 @@ namespace Bookstore.UI.Pages.Publishers
 
         private async Task OpenAddDialog()
         {
-            var options = new DialogOptions
+            var parameters = new DialogParameters();
+            await ShowDialog<AddPublisher>("Add publisher", parameters, _dialogOptions);
+        }
+
+        private async Task OpenUpdateDialog(Publisher publisher)
+        {
+            var selectedPublisher = new UpdatePublisherDto
             {
-                MaxWidth = MaxWidth.Small,
-                FullWidth = true,
-                CloseOnEscapeKey = true,
-                Position = DialogPosition.Center
+                Id = publisher.Id,
+                Name = publisher.Name
             };
 
-            var parameters = new DialogParameters();
-            await ShowDialog<AddPublisher>("Add publisher", parameters, options);
+            var parameters = new DialogParameters
+            {
+                { "SelectedPublisher", selectedPublisher }
+            };
+
+            await ShowDialog<UpdatePublisher>("Edit publisher", parameters, _dialogOptions);
+        }
+
+        private async Task OpenDeleteDialog(Publisher publisher)
+        {
+            var parameters = new DialogParameters
+            {
+                { "SelectedPublisheriD", publisher.Id }
+            };
+
+            await ShowDialog<DeletePublisher>("Delete publisher", parameters, _dialogOptions);
         }
 
         private async Task ShowDialog<T>(string title, DialogParameters? parameters = null, DialogOptions? options = null)

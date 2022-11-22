@@ -1,5 +1,4 @@
-﻿<h3>DeletePublisher</h3>
+﻿@using Bookstore.UI.Components.Dialogs
+@inherits DialogBasePage
 
-@code {
-
-}
+<DeleteDialog Entity="Publisher" OnCancel="Cancel" OnConfirmDelete="ConfirmDelete"/>

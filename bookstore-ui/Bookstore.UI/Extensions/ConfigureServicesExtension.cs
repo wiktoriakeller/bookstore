@@ -36,6 +36,7 @@ namespace Bookstore.UI.Extensions
         private static void AddValidators(IServiceCollection services)
         {
             services.AddScoped<IFormValidator<AddPublisherDto>, AddPublisherDtoValidator>();
+            services.AddScoped<IFormValidator<UpdatePublisherDto>, UpdatePublisherDtoValidator>();
             ValidatorOptions.Global.LanguageManager.Enabled = false;
         }
     }

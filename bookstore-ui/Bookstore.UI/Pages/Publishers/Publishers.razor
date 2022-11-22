@@ -2,7 +2,7 @@
 @using Bookstore.Core.Models;
 
 <style>
-    .button-right {
+    .align-right {
         margin-right: auto;
         margin-left: 20px;
     }
@@ -16,14 +16,14 @@ else
 {
     <MudTable Items="@_publishers" Hover="true" Bordered="false" Dense="false" Breakpoint="Breakpoint.Xs">
         <ToolBarContent>
-            <MudText Typo="Typo.h6">Publishers</MudText>
+            <MudText Typo="Typo.h6" Class="title">Publishers</MudText>
             <MudSpacer />
             <MudTextField 
                 @bind-Value="_publishersNameFilter" 
                 Placeholder="Search name..."
                 Adornment="Adornment.Start" 
                 AdornmentIcon="@Icons.Material.Filled.Search" 
-                IconSize="Size.Medium" 
+                IconSize="Size.Small" 
                 Class="mt-0"
                 OnKeyDown="FilterPublishers"
                 Immediate="true"
@@ -33,7 +33,7 @@ else
                 EndIcon="@Icons.Outlined.Add"
                 Color="Color.Info"
                 Size="Size.Medium"
-                Class="button-right"
+                Class="align-right"
                 OnClick="OpenAddDialog"
             >
                 <span class="button-text">Add</span>
@@ -41,17 +41,28 @@ else
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Nr</MudTh>
-            <MudTh>
-                <MudTableSortLabel 
-                    InitialDirection="SortDirection.Ascending"
-                    SortBy="new Func<Publisher, object>(p => p.Name)">
-                        Name
-                    </MudTableSortLabel>
-            </MudTh>        
+            <MudTh>Name</MudTh>
+            <MudTh>Edit</MudTh>
+            <MudTh>Delete</MudTh>
          </HeaderContent>
         <RowTemplate>
             <MudTd>@GetRowNumber(context)</MudTd>
             <MudTd DataLabel="Name">@context.Name</MudTd>
+            <MudTd DataLabel="Edit">
+                <MudIconButton
+                    Icon="@Icons.Material.Outlined.Edit"
+                    Variant="Variant.Text"
+                    Color="Color.Info"
+                    Size="Size.Small"
+                    OnClick="@(async () => await OpenUpdateDialog(context))" />
+            </MudTd>
+            <MudTd DataLabel="Delete">
+                <MudIconButton Icon="@Icons.Material.Outlined.Delete"
+                    Variant="Variant.Text"
+                    Color="Color.Error"
+                    Size="Size.Small"
+                    OnClick="@(async () => await OpenDeleteDialog(context))" />
+            </MudTd>
         </RowTemplate>
     </MudTable>
 }

@@ -6,15 +6,16 @@ using MudBlazor;
 
 namespace Bookstore.UI.Pages.Publishers
 {
-    public partial class AddPublisher : DialogBasePage
+    public partial class UpdatePublisher : DialogBasePage
     {
+        [Parameter]
+        public UpdatePublisherDto SelectedPublisher { get; set; }
+
         [Inject]
         private IPublishersApi _publishersApi { get; set; }
 
         [Inject]
-        private IFormValidator<AddPublisherDto> _validator { get; set; }
-
-        private AddPublisherDto _addPublisher = new();
+        private IFormValidator<UpdatePublisherDto> _validator { get; set; }
 
         private MudForm _form;
 
@@ -24,8 +25,8 @@ namespace Bookstore.UI.Pages.Publishers
 
             if (_form.IsValid)
             {
-                var successMessage = "Added new publisher";
-                var request = _publishersApi.AddPublisher(_addPublisher);
+                var successMessage = "Updated publisher";
+                var request = _publishersApi.UpdatePublisher(SelectedPublisher.Id, SelectedPublisher);
                 await SendRequest(request, successMessage);
             }
         }

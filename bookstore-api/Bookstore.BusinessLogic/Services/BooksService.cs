@@ -85,13 +85,19 @@ namespace Bookstore.BusinessLogic.Services
                 throw new NotUniqueBookException($"Title {updateBookDto.Title} is already taken by another book");
             }
 
-            var allPublishers = _publishersRepository.GetAll();
-            if (!allPublishers.Any(p => p.Id == updateBookDto.PublisherId))
+            var bookPublisher = await _publishersRepository.FirstOrDefaultAsync(p => p.Id == updateBookDto.PublisherId);
+            if (bookPublisher is null)
             {
                 throw new PublisherNotFoundException($"Specified publisher does not exist");
             }
 
-            var book = _mapper.Map<Book>(updateBookDto);
+            var book = allBooks.First(b => b.Id == updateBookDto.Id);
+            book.Title = updateBookDto.Title;
+            book.Reception = updateBookDto.Reception;
+            book.Genre = updateBookDto.Genre;
+            book.Author = updateBookDto.Author;
+            book.PublisherId = updateBookDto.PublisherId;
+
             await _booksRepository.UpdateAsync(book);
         }
     }

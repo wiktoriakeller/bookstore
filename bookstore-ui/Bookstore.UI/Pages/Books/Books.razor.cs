@@ -53,7 +53,7 @@ namespace Bookstore.UI.Pages.Books
                 Title = book.Title,
                 Author = book.Author,
                 Genre = book.Genre,
-                Reception = book.Reception,
+                Reception = (int)book.Reception,
                 PublisherId = book.PublisherId,
             };
 

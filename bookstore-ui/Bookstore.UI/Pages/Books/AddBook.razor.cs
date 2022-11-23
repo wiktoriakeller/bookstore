@@ -23,12 +23,9 @@ namespace Bookstore.UI.Pages.Books
 
         private Reception _selectedReception = Reception.Bad;
 
-        private MudForm _form;
+        private Publisher _selectedPublisher = new();
 
-        protected override async Task OnInitializedAsync()
-        {
-            _addBook.PublisherId = AllPublishers.First().Id;
-        }
+        private MudForm _form;
 
         private async Task Submit()
         {
@@ -36,6 +33,7 @@ namespace Bookstore.UI.Pages.Books
 
             if (_form.IsValid)
             {
+                _addBook.PublisherId = _selectedPublisher.Id;
                 _addBook.Reception = (int)_selectedReception;
                 var successMessage = "Added new book";
                 var request = _booksApi.AddBook(_addBook);

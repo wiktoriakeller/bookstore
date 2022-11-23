@@ -7,7 +7,7 @@ using MudBlazor;
 
 namespace Bookstore.UI.Pages.Books
 {
-    public partial class Books
+    public partial class Books : BaseTablePage
     {
         [Inject]
         private IBooksApi _booksApi { get; set; }
@@ -15,22 +15,9 @@ namespace Bookstore.UI.Pages.Books
         [Inject]
         private IPublishersApi _publishersApi { get; set; }
 
-        [Inject]
-        private IDialogService _dialogService { get; set; }
-
         private IEnumerable<Book> _books = Enumerable.Empty<Book>();
 
         private IEnumerable<Publisher> _allPublishers = Enumerable.Empty<Publisher>();
-
-        private bool _isLoading = true;
-
-        private DialogOptions _dialogOptions = new DialogOptions
-        {
-            MaxWidth = MaxWidth.Small,
-            FullWidth = true,
-            CloseOnEscapeKey = true,
-            Position = DialogPosition.Center
-        };
 
         protected override async Task OnInitializedAsync()
         {

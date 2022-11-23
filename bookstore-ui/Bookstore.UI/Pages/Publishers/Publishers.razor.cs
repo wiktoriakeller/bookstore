@@ -7,27 +7,14 @@ using MudBlazor;
 
 namespace Bookstore.UI.Pages.Publishers
 {
-    public partial class Publishers
+    public partial class Publishers : BaseTablePage
     {
         [Inject]
         private IPublishersApi _publishersApi { get; set; }
 
-        [Inject]
-        private IDialogService _dialogService { get; set; }
-
         private IEnumerable<Publisher> _publishers = Enumerable.Empty<Publisher>();
 
         private string _publishersNameFilter = string.Empty;
-
-        private bool _isLoading = true;
-
-        private DialogOptions _dialogOptions = new DialogOptions
-        {
-            MaxWidth = MaxWidth.Small,
-            FullWidth = true,
-            CloseOnEscapeKey = true,
-            Position = DialogPosition.Center
-        };
 
         protected override async Task OnInitializedAsync()
         {

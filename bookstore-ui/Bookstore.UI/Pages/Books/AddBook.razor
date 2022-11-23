@@ -1,4 +1,5 @@
 ﻿@using Bookstore.UI.Common;
+@using Bookstore.UI.Common.Models;
 @using Bookstore.UI.Components.Dialogs
 @inherits DialogBasePage
 
@@ -37,8 +38,8 @@
                 <MudSelectItem Value="@Reception.Excellent" />
             </MudSelect>
             <MudSelect 
-                @bind-Value="_addBook.PublisherId" 
-                T="Guid" 
+                @bind-Value="_selectedPublisher" 
+                T="Publisher" 
                 Label="Publisher" 
                 AnchorOrigin="Origin.BottomCenter" 
                 Variant="Variant.Outlined"
@@ -46,7 +47,7 @@
                 RequiredError="Publisher is required"> 
                 @foreach(var publisher in AllPublishers)
                 {
-                    <MudSelectItem Value="@publisher.Id">@publisher.Name</MudSelectItem>
+                    <MudSelectItem Value="@publisher" />
                 }
             </MudSelect>
         </MudForm>

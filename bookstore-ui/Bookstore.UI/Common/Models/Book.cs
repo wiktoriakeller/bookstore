@@ -1,6 +1,6 @@
 ﻿namespace Bookstore.UI.Common.Models
 {
-    public class Book
+    public record Book
     {
         public Guid Id { get; init; }
         public string Title { get; init; }

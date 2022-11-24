@@ -19,6 +19,8 @@ namespace Bookstore.UI.Pages.Books
 
         private IEnumerable<Publisher> _allPublishers = Enumerable.Empty<Publisher>();
 
+        private string _booksTitleFilter = string.Empty;
+
         protected override async Task OnInitializedAsync()
         {
             _books = await _booksApi.GetAllBooks();

@@ -6,6 +6,16 @@
         margin-right: auto;
         margin-left: 20px;
     }
+
+    .filters-div {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: row;
+        gap: 2%;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 25px;
+    }
 </style>
 
 @if (_isLoading)
@@ -16,16 +26,26 @@ else
 {
     <MudTable Items="@_books" Hover="true" Bordered="false" Dense="false" Breakpoint="Breakpoint.Xs">
         <ToolBarContent>
-            <MudText Typo="Typo.h6" Class="title">Books</MudText>
-            <MudSpacer />
-            <MudButton Variant="Variant.Outlined"
-                   EndIcon="@Icons.Outlined.Add"
-                   Color="Color.Info"
-                   Size="Size.Medium"
-                   Class="align-right"
-                   OnClick="OpenAddDialog">
-                <span class="button-text">Add</span>
-            </MudButton>
+            <div class="filters-div">
+                <MudText Typo="Typo.h6" Class="title">Books</MudText>
+                <MudDateRangePicker Label="Books publish date" />
+                <MudTextField @bind-Value="_booksTitleFilter"
+                          Placeholder="Search books..."
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          IconSize="Size.Small"
+                          Class="mt-0"
+                          OnKeyDown="FilterBooks"
+                          Immediate="true" />
+                <MudButton Variant="Variant.Outlined"
+                       EndIcon="@Icons.Outlined.Add"
+                       Color="Color.Info"
+                       Size="Size.Medium"
+                       Class="align-right"
+                       OnClick="OpenAddDialog">
+                    <span class="button-text">Add</span>
+                </MudButton>
+            </div>
         </ToolBarContent>
         <HeaderContent>
             <MudTh>Nr</MudTh>

@@ -26,12 +26,15 @@ namespace Bookstore.UI.Pages.Books
 
         private Publisher _selectedPublisher;
 
+        private DateTime? _selectedDate = DateTime.Now;
+
         private MudForm _form;
 
         protected override void OnInitialized()
         {
             _selectedReception = (Reception)SelectedBook.Reception;
             _selectedPublisher = AllPublishers.First(p => p.Id == SelectedBook.PublisherId);
+            _selectedDate = SelectedBook.PublishDate;
         }
 
         private async Task Submit()
@@ -42,6 +45,7 @@ namespace Bookstore.UI.Pages.Books
             {
                 SelectedBook.PublisherId = _selectedPublisher.Id;
                 SelectedBook.Reception = (int)_selectedReception;
+                SelectedBook.PublishDate = (DateTime)_selectedDate!;
                 var successMessage = "Updated book";
                 var request = _booksApi.UpdateBook(SelectedBook.Id, SelectedBook);
                 await SendRequest(request, successMessage);

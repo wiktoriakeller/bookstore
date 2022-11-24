@@ -25,6 +25,8 @@ namespace Bookstore.UI.Pages.Books
 
         private Publisher _selectedPublisher = new();
 
+        private DateTime? _selectedDate = DateTime.Now;
+
         private MudForm _form;
 
         private async Task Submit()
@@ -35,6 +37,7 @@ namespace Bookstore.UI.Pages.Books
             {
                 _addBook.PublisherId = _selectedPublisher.Id;
                 _addBook.Reception = (int)_selectedReception;
+                _addBook.PublishDate = (DateTime)_selectedDate!;
                 var successMessage = "Added new book";
                 var request = _booksApi.AddBook(_addBook);
                 await SendRequest(request, successMessage);

@@ -3,9 +3,24 @@
 @using Bookstore.UI.Components.Dialogs
 @inherits DialogBasePage
 
+<style>
+    .form {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 10px;
+        width: 100%;
+    }
+
+        .form > * {
+            width: 100%;
+        }
+</style>
+
 <MudDialog>
     <DialogContent>
-        <MudForm Model="@SelectedBook" @ref="@_form" Validation="@(_validator.ValidateForm)" ValidationDelay="0">
+        <MudForm Model="@SelectedBook" @ref="@_form" Validation="@(_validator.ValidateForm)" ValidationDelay="0" Class="form">
             <MudTextField T="string"
                           Label="Title"
                           @bind-Value="@SelectedBook.Title"
@@ -50,6 +65,7 @@
                     <MudSelectItem Value="@publisher" />
                 }
             </MudSelect>
+            <MudDatePicker Label="Publish date" @bind-Date="@_selectedDate" DisableToolbar="true" />
         </MudForm>
     </DialogContent>
 </MudDialog>

@@ -38,7 +38,8 @@ namespace Bookstore.BusinessLogic.Services
             }
 
             var filteredBooks = _booksRepository
-                .GetWhere(b => b.Title.Contains(titleSearch) && booksFiltersDto.ReceptionFilters.Contains(b.Reception));
+                .GetWhere(b => b.Title.Contains(titleSearch) 
+                && b.PublishDate >= booksFiltersDto.PublishDateStart && b.PublishDate <= booksFiltersDto.PublishDateEnd);
             return _mapper.Map<IEnumerable<BookDto>>(filteredBooks);
         }
 
@@ -96,6 +97,7 @@ namespace Bookstore.BusinessLogic.Services
             book.Reception = updateBookDto.Reception;
             book.Genre = updateBookDto.Genre;
             book.Author = updateBookDto.Author;
+            book.PublishDate = updateBookDto.PublishDate;
             book.PublisherId = updateBookDto.PublisherId;
 
             await _booksRepository.UpdateAsync(book);

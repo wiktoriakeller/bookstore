@@ -59,7 +59,7 @@ else
             <MudTh>Delete</MudTh>
          </HeaderContent>
         <RowTemplate>
-            <MudTd>@GetRowNumber(context)</MudTd>
+            <MudTd>(@GetRowNumber(context) + 1)</MudTd>
             <MudTd DataLabel="Name">@context.Name</MudTd>
             <MudTd DataLabel="Edit">
                 <MudIconButton

@@ -1,5 +1,4 @@
-﻿using Bookstore.Core.Common;
-using Bookstore.Core.Dtos.Books;
+﻿using Bookstore.Core.Dtos.Books;
 using FluentValidation;
 
 namespace Bookstore.BusinessLogic.Common.Validators.Books
@@ -8,17 +7,17 @@ namespace Bookstore.BusinessLogic.Common.Validators.Books
     {
         public BookFilterDtoValidator()
         {
-            RuleFor(x => x.ReceptionFilters)
-                .Must((receptions, context) =>
+            RuleFor(x => x)
+                .Must((entity, context) =>
                 {
-                    if (receptions.ReceptionFilters.Any(r => !Enum.IsDefined<Reception>(r)))
+                    if(entity.PublishDateStart > entity.PublishDateEnd)
                     {
                         return false;
                     }
 
                     return true;
                 })
-                .WithMessage("Specified reception does not exist");
+                .WithMessage("Start date should be before end date");
         }
     }
 }

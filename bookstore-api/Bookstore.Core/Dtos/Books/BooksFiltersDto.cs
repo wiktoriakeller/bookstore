@@ -5,6 +5,7 @@ namespace Bookstore.Core.Dtos.Books
     public class BooksFiltersDto
     {
         public string? TitleFilter { get; init; }
-        public Reception[] ReceptionFilters { get; init; } = Array.Empty<Reception>();
+        public DateTime PublishDateStart { get; init; }
+        public DateTime PublishDateEnd { get; init; }
     }
 }

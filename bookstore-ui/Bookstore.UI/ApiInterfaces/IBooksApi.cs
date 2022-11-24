@@ -10,7 +10,7 @@ namespace Bookstore.UI.ApiInterfaces
         Task<IEnumerable<Book>> GetAllBooks();
 
         [Post("/api/v1/books/filters")]
-        Task<IEnumerable<Publisher>> GetFilteredBooks([Body] BooksFiltersDto booksFiltersDto);
+        Task<IEnumerable<Book>> GetFilteredBooks([Body] BooksFiltersDto booksFiltersDto);
 
         [Post("/api/v1/books/")]
         Task AddBook([Body] AddBookDto addBookDto);

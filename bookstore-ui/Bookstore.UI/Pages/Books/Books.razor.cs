@@ -1,6 +1,7 @@
 ﻿using Bookstore.Core.Dtos.Books;
 using Bookstore.UI.ApiInterfaces;
 using Bookstore.UI.Common.Models;
+using Bookstore.UI.Pages.Publishers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
@@ -21,11 +22,16 @@ namespace Bookstore.UI.Pages.Books
 
         private string _booksTitleFilter = string.Empty;
 
+        private MudDateRangePicker _picker;
+
+        private DateRange _dateRange;
+
         protected override async Task OnInitializedAsync()
         {
             _books = await _booksApi.GetAllBooks();
             _allPublishers = await _publishersApi.GetAllPublishers();
             _isLoading = false;
+            _dateRange = new DateRange(DateTime.Now.AddMonths(-2).Date, DateTime.Now.Date);
             StateHasChanged();
         }
 
@@ -33,6 +39,16 @@ namespace Bookstore.UI.Pages.Books
         {
             if (e.Key == "Enter")
             {
+                var filters = new BooksFiltersDto
+                {
+                    PublishDateStart = _dateRange.Start ?? DateTime.Now.Date,
+                    PublishDateEnd = _dateRange.End ?? DateTime.Now.Date,
+                    TitleFilter = _booksTitleFilter
+                };
+
+                var filtered = await _booksApi.GetFilteredBooks(filters);
+                _books = filtered ?? Enumerable.Empty<Book>();
+                _booksTitleFilter = string.Empty;
                 StateHasChanged();
             }
         }

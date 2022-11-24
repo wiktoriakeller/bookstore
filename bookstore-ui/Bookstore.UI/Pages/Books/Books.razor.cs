@@ -39,18 +39,23 @@ namespace Bookstore.UI.Pages.Books
         {
             if (e.Key == "Enter")
             {
-                var filters = new BooksFiltersDto
-                {
-                    PublishDateStart = _dateRange.Start ?? DateTime.Now.Date,
-                    PublishDateEnd = _dateRange.End ?? DateTime.Now.Date,
-                    TitleFilter = _booksTitleFilter
-                };
-
-                var filtered = await _booksApi.GetFilteredBooks(filters);
-                _books = filtered ?? Enumerable.Empty<Book>();
-                _booksTitleFilter = string.Empty;
-                StateHasChanged();
+                await Filter();
             }
+        }
+
+        private async Task Filter()
+        {
+            var filters = new BooksFiltersDto
+            {
+                PublishDateStart = _dateRange.Start ?? DateTime.Now.Date,
+                PublishDateEnd = _dateRange.End ?? DateTime.Now.Date,
+                TitleFilter = _booksTitleFilter
+            };
+
+            var filtered = await _booksApi.GetFilteredBooks(filters);
+            _books = filtered ?? Enumerable.Empty<Book>();
+            _booksTitleFilter = string.Empty;
+            StateHasChanged();
         }
 
         private async Task OpenAddDialog()
@@ -72,7 +77,8 @@ namespace Bookstore.UI.Pages.Books
                 Author = book.Author,
                 Genre = book.Genre,
                 Reception = (int)book.Reception,
-                PublisherId = book.PublisherId,
+                PublishDate = book.PublishDate,
+                PublisherId = book.PublisherId
             };
 
             var parameters = new DialogParameters

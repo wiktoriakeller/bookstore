@@ -39,7 +39,8 @@ namespace Bookstore.BusinessLogic.Services
 
             var filteredBooks = _booksRepository
                 .GetWhere(b => b.Title.Contains(titleSearch) 
-                && b.PublishDate >= booksFiltersDto.PublishDateStart && b.PublishDate <= booksFiltersDto.PublishDateEnd);
+                && b.PublishDate.Date >= booksFiltersDto.PublishDateStart.Date && b.PublishDate.Date <= booksFiltersDto.PublishDateEnd.Date);
+
             return _mapper.Map<IEnumerable<BookDto>>(filteredBooks);
         }
 

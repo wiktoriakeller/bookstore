@@ -2,11 +2,6 @@
 @inherits BaseTablePage
 
 <style>
-    .align-right {
-        margin-right: auto;
-        margin-left: 20px;
-    }
-
     .filters-div {
         display: flex;
         align-items: flex-end;
@@ -38,11 +33,11 @@ else
                           Class="mt-0"
                           OnKeyDown="FilterBooks"
                           Immediate="true" />
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="@(async () => await Filter())">Search</MudButton>
                 <MudButton Variant="Variant.Outlined"
                        EndIcon="@Icons.Outlined.Add"
                        Color="Color.Info"
                        Size="Size.Medium"
-                       Class="align-right"
                        OnClick="OpenAddDialog">
                     <span class="button-text">Add</span>
                 </MudButton>

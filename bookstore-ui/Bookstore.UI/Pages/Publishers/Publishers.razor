@@ -3,12 +3,6 @@
 @using Bookstore.UI.Common.Models;
 
 <style>
-    .align-right {
-        margin-right: auto;
-        margin-left: 20px;
-    }
-
-
     .filters-div {
         display: flex;
         align-items: flex-end;
@@ -40,12 +34,12 @@ else
                     OnKeyDown="FilterPublishers"
                     Immediate="true"
                 />
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="@(async () => await Filter())">Search</MudButton>
                 <MudButton
                     Variant="Variant.Outlined"
                     EndIcon="@Icons.Outlined.Add"
                     Color="Color.Info"
                     Size="Size.Medium"
-                    Class="align-right"
                     OnClick="OpenAddDialog"
                 >
                     <span class="button-text">Add</span>
@@ -59,7 +53,7 @@ else
             <MudTh>Delete</MudTh>
          </HeaderContent>
         <RowTemplate>
-            <MudTd>(@GetRowNumber(context) + 1)</MudTd>
+            <MudTd>@(GetRowNumber(context) + 1)</MudTd>
             <MudTd DataLabel="Name">@context.Name</MudTd>
             <MudTd DataLabel="Edit">
                 <MudIconButton

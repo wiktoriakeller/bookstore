@@ -27,11 +27,16 @@ namespace Bookstore.UI.Pages.Publishers
         {
             if (e.Key == "Enter")
             {
-                var filtered = await _publishersApi.GetFilteredPublishers(_publishersNameFilter);
-                _publishers = filtered ?? Enumerable.Empty<Publisher>();
-                _publishersNameFilter = string.Empty;
-                StateHasChanged();
+                await Filter();
             }
+        }
+
+        private async Task Filter()
+        {
+            var filtered = await _publishersApi.GetFilteredPublishers(_publishersNameFilter);
+            _publishers = filtered ?? Enumerable.Empty<Publisher>();
+            _publishersNameFilter = string.Empty;
+            StateHasChanged();
         }
 
         private async Task OpenAddDialog()

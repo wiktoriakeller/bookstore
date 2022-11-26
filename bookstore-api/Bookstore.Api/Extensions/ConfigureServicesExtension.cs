@@ -8,7 +8,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bookstore.WebApi.Extensions
+namespace Bookstore.Api.Extensions
 {
     public static class ConfigureServicesExtension
     {

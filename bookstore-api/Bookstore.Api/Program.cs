@@ -1,5 +1,6 @@
-using Bookstore.WebApi.Extensions;
-using Bookstore.WebApi.Middleware;
+using Bookstore.Api.Extensions;
+using Bookstore.Api.Middleware;
+using Bookstore.DataAccess.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +26,8 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 app.UseCors(policyName);
+
+app.ApplyMigrations();
 
 if (app.Environment.IsDevelopment())
 {

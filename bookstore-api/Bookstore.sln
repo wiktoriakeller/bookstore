@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Core", "Bookstore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Interfaces", "Bookstore.Interfaces\Bookstore.Interfaces.csproj", "{D10F8BBF-CDEB-4329-9F0B-9115B04EA6EF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.WebApi", "Bookstore.Api\Bookstore.WebApi.csproj", "{245A30E2-C8AB-46B9-AFD6-31130AF4F835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Api", "Bookstore.Api\Bookstore.Api.csproj", "{245A30E2-C8AB-46B9-AFD6-31130AF4F835}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.DataAccessMock", "Bookstore.DataAccessMock\Bookstore.DataAccessMock.csproj", "{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}"
 EndProject

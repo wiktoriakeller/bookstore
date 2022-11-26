@@ -2,7 +2,7 @@
 using Bookstore.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bookstore.WebApi.Controllers
+namespace Bookstore.Api.Controllers
 {
     [ApiController]
     [Route("api/v1/publishers")]

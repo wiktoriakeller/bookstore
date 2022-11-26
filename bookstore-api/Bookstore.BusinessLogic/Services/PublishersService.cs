@@ -10,12 +10,17 @@ namespace Bookstore.BusinessLogic.Services
     public class PublishersService : IPublishersService
     {
         private readonly IPublishersRepository _publishersRepository;
+        private readonly IBooksRepository _booksRepository;
         private readonly IMapper _mapper;
 
-        public PublishersService(IPublishersRepository publishersRepository, IMapper mapper)
+        public PublishersService(
+            IPublishersRepository publishersRepository,
+            IBooksRepository booksRepository,
+            IMapper mapper)
         {
             _mapper = mapper;
             _publishersRepository = publishersRepository;
+            _booksRepository = booksRepository;
         }
 
         public IEnumerable<PublisherDto> GetAllPublishers()
@@ -32,7 +37,7 @@ namespace Bookstore.BusinessLogic.Services
                 search = publishersFiltersDto.NameFilter.ToLower();
             }
 
-            var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().Contains(search));
+            var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().StartsWith(search));
             return _mapper.Map<IEnumerable<PublisherDto>>(filteredPublishers);
         }
 
@@ -59,7 +64,7 @@ namespace Bookstore.BusinessLogic.Services
                 throw new PublisherNotFoundException("Specified publisher does not exist");
             }
 
-            if (publisher.Books.Any())
+            if (_booksRepository.GetAll().FirstOrDefault(b => b.Publisher.Id == deletePublisherDto.Id) is not null)
             {
                 throw new PublisherHasBooksException("You can't delete publisher that has books");
             }

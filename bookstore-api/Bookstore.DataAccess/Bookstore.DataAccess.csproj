@@ -17,7 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Bookstore.Core\Bookstore.Core.csproj" />
 		<ProjectReference Include="..\Bookstore.Interfaces\Bookstore.Interfaces.csproj" />
 	</ItemGroup>
 </Project>

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Bookstore.DataAccessSQL.Repositories
+namespace Bookstore.DataAccess.Repositories
 {
     public class BaseRepository<TEntity> : IRepository<TEntity>
         where TEntity : class
@@ -16,8 +16,7 @@ namespace Bookstore.DataAccessSQL.Repositories
 
         public virtual async ValueTask<TEntity?> GetByIdAsync(Guid id)
         {
-            return await _dbContext.Set<TEntity>()
-                .FindAsync(id);
+            return await _dbContext.Set<TEntity>().FindAsync(id);
         }
 
         public virtual IEnumerable<TEntity> GetAll()
@@ -27,20 +26,17 @@ namespace Bookstore.DataAccessSQL.Repositories
 
         public virtual IEnumerable<TEntity> GetWhere(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>()
-                .Where(predicate);
+            return _dbContext.Set<TEntity>().Where(predicate);
         }
 
         public virtual async Task<TEntity?> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbContext.Set<TEntity>()
-                .FirstOrDefaultAsync(predicate);
+            return await _dbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
         }
 
         public virtual async Task<TEntity?> SignleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await _dbContext.Set<TEntity>()
-                .SingleOrDefaultAsync(predicate);
+            return await _dbContext.Set<TEntity>().SingleOrDefaultAsync(predicate);
         }
 
         public async Task<TEntity> AddAsync(TEntity entity)

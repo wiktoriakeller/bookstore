@@ -1,15 +1,12 @@
+using Bookstore.Api.Extensions;
 using Bookstore.Api.Middleware;
-using Bookstore.BusinessLogic.Extensions;
-using Bookstore.DataAccessSQL.Extensions;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDataAccess(builder.Configuration);
-builder.Services.AddBusinessLogic();
+builder.Services.RegisterServices(builder.Configuration);
 
 var origins = builder.Configuration.GetSection("AllowedOrigins").Get<string[]>();
 var policyName = "bookstoreUI";

@@ -2,7 +2,7 @@
 using Bookstore.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bookstore.DataAccessSQL.Repositories
+namespace Bookstore.DataAccess.Repositories
 {
     public class PublishersRepository : BaseRepository<Publisher>, IPublishersRepository
     {

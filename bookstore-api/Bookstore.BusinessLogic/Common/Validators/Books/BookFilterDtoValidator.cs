@@ -10,14 +10,14 @@ namespace Bookstore.BusinessLogic.Common.Validators.Books
             RuleFor(x => x)
                 .Must((entity, context) =>
                 {
-                    if(entity.PublishDateStart > entity.PublishDateEnd)
+                    if (entity.PublishDateStart > entity.PublishDateEnd)
                     {
                         return false;
                     }
 
                     return true;
                 })
-                .WithMessage("Start date should be before end date");
+                .WithMessage("Start date should not proceed end date");
         }
     }
 }

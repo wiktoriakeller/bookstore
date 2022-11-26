@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33103.184
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.BusinessLogic", "Bookstore.BusinessLogic\Bookstore.BusinessLogic.csproj", "{284610A6-8CF7-41E4-ACD3-B46C15F854E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.BusinessLogic", "Bookstore.BusinessLogic\Bookstore.BusinessLogic.csproj", "{284610A6-8CF7-41E4-ACD3-B46C15F854E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.DataAccessSQL", "Bookstore.DataAccess\Bookstore.DataAccessSQL.csproj", "{99D6E43D-4FAF-4992-9C50-20A78303B2B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.DataAccess", "Bookstore.DataAccess\Bookstore.DataAccess.csproj", "{99D6E43D-4FAF-4992-9C50-20A78303B2B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Core", "Bookstore.Core\Bookstore.Core.csproj", "{45A32F66-CDD1-4C71-899E-C531F014952E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Core", "Bookstore.Core\Bookstore.Core.csproj", "{45A32F66-CDD1-4C71-899E-C531F014952E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Interfaces", "Bookstore.Interfaces\Bookstore.Interfaces.csproj", "{D10F8BBF-CDEB-4329-9F0B-9115B04EA6EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Interfaces", "Bookstore.Interfaces\Bookstore.Interfaces.csproj", "{D10F8BBF-CDEB-4329-9F0B-9115B04EA6EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bookstore.Api", "Bookstore.Api\Bookstore.Api.csproj", "{245A30E2-C8AB-46B9-AFD6-31130AF4F835}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.Api", "Bookstore.Api\Bookstore.Api.csproj", "{245A30E2-C8AB-46B9-AFD6-31130AF4F835}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bookstore.DataAccessMock", "Bookstore.DataAccessMock\Bookstore.DataAccessMock.csproj", "{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{245A30E2-C8AB-46B9-AFD6-31130AF4F835}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{245A30E2-C8AB-46B9-AFD6-31130AF4F835}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{245A30E2-C8AB-46B9-AFD6-31130AF4F835}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2DE9FE1-59FE-4BF4-A533-F489FA7B1FE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

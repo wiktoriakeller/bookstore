@@ -22,7 +22,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Bookstore.BusinessLogic\Bookstore.BusinessLogic.csproj" />
-    <ProjectReference Include="..\Bookstore.DataAccess\Bookstore.DataAccessSQL.csproj" />
+    <ProjectReference Include="..\Bookstore.DataAccessMock\Bookstore.DataAccessMock.csproj" />
+    <ProjectReference Include="..\Bookstore.DataAccess\Bookstore.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

@@ -3,7 +3,7 @@ using Bookstore.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Bookstore.DataAccessSQL.Repositories
+namespace Bookstore.DataAccess.Repositories
 {
     public class BooksRepository : BaseRepository<Book>, IBooksRepository
     {

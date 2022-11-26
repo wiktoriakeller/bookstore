@@ -22,7 +22,7 @@ Then in the `src` folder run:
 docker compose up
 ```
 
-Web API URL: `localhost:5000`
+Web API URL: `localhost:5000/swagger`
 
 Client app URL: `localhost:8000`
 

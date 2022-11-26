@@ -27,5 +27,15 @@ services:
     networks:
       - localdev
 
+  bookstore-ui:
+    container_name: bookstore-ui
+    build:
+      context: ./bookstore-ui/
+    restart: always
+    depends_on:
+      - bookstore-api
+    networks:
+      - localdev
+
 volumes:
   db-data:

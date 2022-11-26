@@ -4,6 +4,12 @@ services:
       - "ASPNETCORE_ENVIRONMENT=Development"
       - "ConnectionStrings:DefaultConnection=Server=bookstore-db-sql;Database=BookstoreDbDev;User=sa;Password=${SA_PASSWORD?err};TrustServerCertificate=True;"
       - "DataAccess:UseMockDataAccess=${USE_MOCK_DATA_ACCESS?err}"
-      - "AllowedOrigins=http://localhost:3000"
+      - "AllowedOrigins=http://localhost:8000"
     ports:
       - 5000:80
+  bookstore-ui:
+    build:
+      args:
+        - API=http://localhost:5000
+    ports:
+      - 8000:80

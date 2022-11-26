@@ -7,6 +7,6 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddUILayer();
+builder.Services.AddUILayer(builder.Configuration);
 
 await builder.Build().RunAsync();

@@ -11,7 +11,7 @@ namespace Bookstore.UI.Extensions
 {
     public static class ConfigureServicesExtension
     {
-        public static IServiceCollection AddUILayer(this IServiceCollection services)
+        public static IServiceCollection AddUILayer(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMudServices(config =>
             {
@@ -23,14 +23,14 @@ namespace Bookstore.UI.Extensions
                 config.SnackbarConfiguration.ShowTransitionDuration = 500;
             });
 
-            AddHttpClients(services);
+            AddHttpClients(services, configuration);
             AddValidators(services);
             return services;
         }
 
-        private static void AddHttpClients(IServiceCollection services)
+        private static void AddHttpClients(IServiceCollection services, IConfiguration configuration)
         {
-            var apiUrl = "https://localhost:44361";
+            var apiUrl = configuration.GetValue<string>("APIUrl");
             services.AddRefitClient<IPublishersApi>().ConfigureHttpClient(c => c.BaseAddress = new Uri(apiUrl));
             services.AddRefitClient<IBooksApi>().ConfigureHttpClient(c => c.BaseAddress = new Uri(apiUrl));
         }

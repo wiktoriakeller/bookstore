@@ -102,6 +102,7 @@ namespace Bookstore.BusinessLogic.Services
             book.Author = updateBookDto.Author;
             book.PublishDate = updateBookDto.PublishDate;
             book.PublisherId = updateBookDto.PublisherId;
+            book.Publisher = bookPublisher;
 
             await _booksRepository.UpdateAsync(book);
         }

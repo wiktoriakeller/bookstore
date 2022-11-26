@@ -4,7 +4,7 @@ Web API and a blazor client app for a bookstore.
 
 # Setup
 
-Create `.env` file in the root folder, it should contain the following variables:
+Create `.env` file in the `src` folder, it should contain the following variables:
 
 - `SA_PASSWORD` - password to the database,
 - `USE_MOCK_DATA_ACCESS` - boolean value, determines whether use mock or a sql database
@@ -16,7 +16,7 @@ SA_PASSWORD=Your_password123
 USE_MOCK_DATA_ACCESS=false
 ```
 
-Then in the root folder run:
+Then in the `src` folder run:
 
 ```
 docker compose up

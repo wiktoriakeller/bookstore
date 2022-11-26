@@ -1,0 +1,16 @@
+﻿@code {
+    [CascadingParameter]
+    private MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public string EntityName { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<bool> OnConfirm { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnCancel { get; set; }
+
+    protected async Task Confirm() => await OnConfirm.InvokeAsync();
+    protected async Task Cancel() => await OnCancel.InvokeAsync();
+}

@@ -1,0 +1,44 @@
+﻿@using Bookstore.UI.Common.Models;
+@using Refit;
+@using System.Text.Json;
+
+@code {
+    [Inject]
+    protected ISnackbar _snackbar { get; set; }
+
+    [CascadingParameter]
+    protected MudDialogInstance _mudDialog { get; set; }
+
+    protected void AddSnackbarMessage(bool success, string message)
+    {
+        var severity = success ? Severity.Success : Severity.Error;
+
+        _snackbar.Add(message, severity);
+
+        if(success)
+        {
+            _mudDialog.Close(DialogResult.Ok(true));
+        }
+    }
+
+    protected async Task SendRequest (Task httpRequest, string successMessage)
+    {
+        bool success;
+        var message = successMessage;
+
+        try
+        {
+            await httpRequest;
+            success = true;
+        }
+        catch (ApiException ex)
+        {
+            message = JsonSerializer.Deserialize<ErrorMessage>(ex.Content).Errors;
+            success = false;
+        }
+
+        AddSnackbarMessage(success, message);
+    }
+
+    protected void Cancel() => _mudDialog.Cancel();
+}

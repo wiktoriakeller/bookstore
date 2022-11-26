@@ -1,0 +1,81 @@
+﻿@page "/"
+@inherits BaseTablePage
+
+<style>
+    .filters-div {
+        display: flex;
+        align-items: flex-end;
+        flex-direction: row;
+        gap: 2%;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 25px;
+    }
+</style>
+
+@if (_isLoading)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudTable Items="@_books" Hover="true" Bordered="false" Dense="false" Breakpoint="Breakpoint.Xs">
+        <ToolBarContent>
+            <div class="filters-div">
+                <MudText Typo="Typo.h6" Class="title">Books</MudText>
+                <MudDateRangePicker Label="Publish date" @bind-DateRange="@_dateRange" />
+                <MudTextField @bind-Value="_booksTitleFilter"
+                          Placeholder="Search books..."
+                          Adornment="Adornment.Start"
+                          AdornmentIcon="@Icons.Material.Filled.Search"
+                          IconSize="Size.Small"
+                          Class="mt-0"
+                          OnKeyDown="FilterBooks"
+                          Immediate="true" />
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" OnClick="@(async () => await Filter())">Search</MudButton>
+                <MudButton Variant="Variant.Outlined"
+                       EndIcon="@Icons.Outlined.Add"
+                       Color="Color.Info"
+                       Size="Size.Medium"
+                       OnClick="OpenAddDialog">
+                    <span class="button-text">Add</span>
+                </MudButton>
+            </div>
+        </ToolBarContent>
+        <HeaderContent>
+            <MudTh>Nr</MudTh>
+            <MudTh>Title</MudTh>
+            <MudTh>Author</MudTh>
+            <MudTh>Publisher</MudTh>
+            <MudTh>Genre</MudTh>
+            <MudTh>Reception</MudTh>
+            <MudTh>Publish date</MudTh>
+            <MudTh>Edit</MudTh>
+            <MudTh>Delete</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            <MudTd>@(GetRowNumber(context) + 1)</MudTd>
+            <MudTd DataLabel="Title">@context.Title</MudTd>
+            <MudTd DataLabel="Author">@context.Author</MudTd>
+            <MudTd DataLabel="Publisher">@context.Publisher.Name</MudTd>
+            <MudTd DataLabel="Genre">@context.Genre</MudTd>
+            <MudTd DataLabel="Reception">@context.Reception.ToString()</MudTd>
+            <MudTd DataLabel="PublishDate">@context.PublishDate.ToShortDateString()</MudTd>
+            <MudTd DataLabel="Edit">
+                <MudIconButton Icon="@Icons.Material.Outlined.Edit"
+                           Variant="Variant.Text"
+                           Color="Color.Info"
+                           Size="Size.Small"
+                           OnClick="@(async () => await OpenUpdateDialog(context))" />
+            </MudTd>
+            <MudTd DataLabel="Delete">
+                <MudIconButton Icon="@Icons.Material.Outlined.Delete"
+                           Variant="Variant.Text"
+                           Color="Color.Error"
+                           Size="Size.Small"
+                           OnClick="@(async () => await OpenDeleteDialog(context))" />
+            </MudTd>
+        </RowTemplate>
+    </MudTable>
+}

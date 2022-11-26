@@ -1,0 +1,41 @@
+networks:
+  localdev:
+    name: localbookstore
+
+services:
+  bookstore-db-sql:
+    container_name: bookstore-db-sql
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: ${SA_PASSWORD?err}
+    user: root
+    ports:
+      - "1433:1433"
+    networks:
+      - localdev
+    volumes:
+      - db-data:/var/opt/mssql/data
+
+  bookstore-api:
+    container_name: bookstore-api
+    build:
+      context: ./bookstore-api/
+    restart: always
+    depends_on:
+      - bookstore-db-sql
+    networks:
+      - localdev
+
+  bookstore-ui:
+    container_name: bookstore-ui
+    build:
+      context: ./bookstore-ui/
+    restart: always
+    depends_on:
+      - bookstore-api
+    networks:
+      - localdev
+
+volumes:
+  db-data:

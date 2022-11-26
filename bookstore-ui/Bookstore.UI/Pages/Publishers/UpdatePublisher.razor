@@ -1,0 +1,17 @@
+﻿@inherits DialogBasePage
+@using Bookstore.UI.Components.Dialogs
+
+<MudDialog>
+    <DialogContent>
+        <MudForm Model="@SelectedPublisher" @ref="@_form" Validation="@(_validator.ValidateForm)" ValidationDelay="0" >
+            <MudTextField
+                T="string"
+                Label="Name"
+                @bind-Value="SelectedPublisher.Name"
+                Variant="Variant.Outlined"
+                Immediate="true"
+                For="@(() => SelectedPublisher.Name)" />
+        </MudForm>
+    </DialogContent>
+</MudDialog>
+<UpdateDialog EntityName="Publisher" OnConfirm="@(async () => await Submit())" OnCancel="Cancel" />

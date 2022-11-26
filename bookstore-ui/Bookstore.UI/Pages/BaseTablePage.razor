@@ -1,0 +1,14 @@
+﻿@code {
+    [Inject]
+    protected IDialogService _dialogService { get; set; }
+
+    protected bool _isLoading = true;
+
+    protected DialogOptions _dialogOptions = new DialogOptions
+    {
+        MaxWidth = MaxWidth.Small,
+        FullWidth = true,
+        CloseOnEscapeKey = true,
+        Position = DialogPosition.Center
+    };
+}

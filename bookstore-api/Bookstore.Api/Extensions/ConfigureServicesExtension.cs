@@ -8,13 +8,13 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bookstore.Api.Extensions
+namespace Bookstore.WebApi.Extensions
 {
     public static class ConfigureServicesExtension
     {
         public static IServiceCollection RegisterServices(this IServiceCollection services, IConfiguration configuration)
         {
-            AddDataAccess(services, configuration);
+            services.AddDataAccess(configuration);
             AddBusinessLogic(services);
             return services;
         }

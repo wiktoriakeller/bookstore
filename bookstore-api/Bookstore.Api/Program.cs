@@ -1,5 +1,5 @@
-using Bookstore.Api.Extensions;
-using Bookstore.Api.Middleware;
+using Bookstore.WebApi.Extensions;
+using Bookstore.WebApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 

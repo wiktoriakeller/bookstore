@@ -3,18 +3,24 @@ WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+# Copy .csproj files and restore project dependencies
+FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build-env
 WORKDIR /src
-COPY ["Bookstore.Api/Bookstore.Api.csproj", "Bookstore.Api/"]
-RUN dotnet restore "Bookstore.Api/Bookstore.Api.csproj"
-COPY . .
-WORKDIR "/src/Bookstore.Api"
-RUN dotnet build "Bookstore.Api.csproj" -c Release -o /app/build
+COPY *.sln .
 
-FROM build AS publish
-RUN dotnet publish "Bookstore.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+COPY Bookstore.Core/*.csproj ./Playmate.Social.Domain/
+COPY Bookstore.Interfaces/*.csproj ./Playmate.Social.Domain/
+COPY Bookstore.BusinessLogic/*.csproj ./Playmate.Social.Domain/
+COPY Bookstore.DataAccess/*.csproj ./Playmate.Social.Application/
+COPY Bookstore.DataAccessMock/*.csproj ./Playmate.Social.Infrastructure/
+COPY Playmate.Api/*.csproj ./Playmate.Social.WebAPI/
+RUN dotnet restore "./Playmate.Social.WebAPI/Playmate.Social.WebAPI.csproj"
+
+# Copy everything else to our current working directory and publish
+COPY . .
+RUN dotnet publish "./Playmate.Social.WebAPI/Playmate.Social.WebAPI.csproj" -c Release -o /app/publish --no-restore
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Bookstore.Api.dll"]
+COPY --from=build-env /app/publish .
+ENTRYPOINT ["dotnet", "Playmate.Social.WebAPI.dll"]

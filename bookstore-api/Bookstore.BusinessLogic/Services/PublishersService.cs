@@ -37,7 +37,7 @@ namespace Bookstore.BusinessLogic.Services
                 search = publishersFiltersDto.NameFilter.ToLower();
             }
 
-            var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().StartsWith(search));
+            var filteredPublishers = _publishersRepository.GetWhere(p => p.Name.ToLower().Contains(search));
             return _mapper.Map<IEnumerable<PublisherDto>>(filteredPublishers);
         }
 

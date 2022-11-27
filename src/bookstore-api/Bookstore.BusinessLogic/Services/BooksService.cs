@@ -47,9 +47,9 @@ namespace Bookstore.BusinessLogic.Services
         public async Task<Guid> AddBook(AddBookDto addBookDto)
         {
             var allBooks = _booksRepository.GetAll();
-            var bookTitle = addBookDto.Title.ToLower();
+            var bookTitle = addBookDto.Title.ToLower().Trim();
 
-            if (allBooks.Any(b => b.Title.ToLower() == bookTitle))
+            if (allBooks.Any(b => b.Title.ToLower().Trim() == bookTitle))
             {
                 throw new NotUniqueBookException($"Title {addBookDto.Title} is already taken by another book");
             }
@@ -62,6 +62,7 @@ namespace Bookstore.BusinessLogic.Services
             }
 
             var book = _mapper.Map<Book>(addBookDto);
+            book.Title = addBookDto.Title.Trim();
             book.Publisher = selectedPublisher;
 
             await _booksRepository.AddAsync(book);
@@ -82,9 +83,9 @@ namespace Bookstore.BusinessLogic.Services
         public async Task UpdateBook(UpdateBookDto updateBookDto)
         {
             var allBooks = _booksRepository.GetAll();
-            var bookTitle = updateBookDto.Title.ToLower();
+            var bookTitle = updateBookDto.Title.ToLower().Trim();
 
-            if (allBooks.Any(b => b.Title.ToLower() == bookTitle && b.Id != updateBookDto.Id))
+            if (allBooks.Any(b => b.Title.ToLower().Trim() == bookTitle && b.Id != updateBookDto.Id))
             {
                 throw new NotUniqueBookException($"Title {updateBookDto.Title} is already taken by another book");
             }
@@ -96,7 +97,7 @@ namespace Bookstore.BusinessLogic.Services
             }
 
             var book = allBooks.First(b => b.Id == updateBookDto.Id);
-            book.Title = updateBookDto.Title;
+            book.Title = updateBookDto.Title.Trim();
             book.Reception = updateBookDto.Reception;
             book.Genre = updateBookDto.Genre;
             book.Author = updateBookDto.Author;

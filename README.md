@@ -1,6 +1,18 @@
-# Bookstore
+# 📚 Bookstore
 
 Web API and a Blazor client app for a bookstore.
+
+# Technologies
+
+- .NET 7
+- ASP.NET Core
+- FluentValidation
+- AutoMapper
+- Entity Framework Core
+- Blazor
+- HTML 5
+- CSS 3
+- Docker
 
 # Setup
 
@@ -12,8 +24,8 @@ Create `.env` file in the `src` folder, it should contain the following variable
 Example file:
 
 ```
-USE_MOCK_DATA_ACCESS=false
 SA_PASSWORD=superPassword123
+USE_MOCK_DATA_ACCESS=false
 ```
 
 Then in the `src` folder run:

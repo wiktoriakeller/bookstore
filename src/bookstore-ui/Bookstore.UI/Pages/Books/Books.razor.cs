@@ -22,8 +22,6 @@ namespace Bookstore.UI.Pages.Books
 
         private string _booksTitleFilter = string.Empty;
 
-        private MudDateRangePicker _picker;
-
         private DateRange _dateRange;
 
         protected override async Task OnInitializedAsync()

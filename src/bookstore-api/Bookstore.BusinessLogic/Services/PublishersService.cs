@@ -44,14 +44,16 @@ namespace Bookstore.BusinessLogic.Services
         public async Task<Guid> AddPublisher(AddPublisherDto addPublisherDto)
         {
             var allPublishers = _publishersRepository.GetAll();
-            var publisherName = addPublisherDto.Name.ToLower();
+            var publisherName = addPublisherDto.Name.ToLower().Trim();
 
-            if (allPublishers.Any(p => p.Name.ToLower() == publisherName))
+            if (allPublishers.Any(p => p.Name.ToLower().Trim() == publisherName))
             {
                 throw new NotUniquePublisherException($"Name {addPublisherDto.Name} is already taken by another publisher");
             }
 
             var publisher = _mapper.Map<Publisher>(addPublisherDto);
+            publisher.Name = addPublisherDto.Name.Trim();
+
             await _publishersRepository.AddAsync(publisher);
             return publisher.Id;
         }
@@ -81,13 +83,15 @@ namespace Bookstore.BusinessLogic.Services
                 throw new PublisherNotFoundException("Specified publisher does not exist");
             }
 
+            var publisherName = publisher.Name.ToLower().Trim();
             var allPublishers = _publishersRepository.GetAll();
-            if (allPublishers.Any(p => p.Name == updatePublisherDto.Name && p.Id != updatePublisherDto.Id))
+
+            if (allPublishers.Any(p => p.Name.ToLower().Trim() == publisherName && p.Id != updatePublisherDto.Id))
             {
                 throw new NotUniquePublisherException($"Name {updatePublisherDto.Name} is already taken by another publisher");
             }
 
-            publisher.Name = updatePublisherDto.Name;
+            publisher.Name = updatePublisherDto.Name.Trim();
             await _publishersRepository.UpdateAsync(publisher);
         }
     }

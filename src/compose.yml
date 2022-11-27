@@ -1,6 +1,6 @@
 networks:
   localdev:
-    name: localbookstore
+    name: localdev
 
 services:
   bookstore-db-sql:

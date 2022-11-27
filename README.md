@@ -1,6 +1,6 @@
 # Bookstore
 
-Web API and a blazor client app for a bookstore.
+Web API and a Blazor client app for a bookstore.
 
 # Setup
 
@@ -12,8 +12,8 @@ Create `.env` file in the `src` folder, it should contain the following variable
 Example file:
 
 ```
-SA_PASSWORD=Your_password123
 USE_MOCK_DATA_ACCESS=false
+SA_PASSWORD=superPassword123
 ```
 
 Then in the `src` folder run:

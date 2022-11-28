@@ -2,6 +2,6 @@
 {
     public class AddPublisherDto
     {
-        public string Name { get; init; }
+        public string Name { get; set; }
     }
 }

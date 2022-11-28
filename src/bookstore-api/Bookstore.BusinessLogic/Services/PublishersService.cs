@@ -43,10 +43,10 @@ namespace Bookstore.BusinessLogic.Services
 
         public async Task<Guid> AddPublisher(AddPublisherDto addPublisherDto)
         {
-            var allPublishers = _publishersRepository.GetAll();
             var publisherName = addPublisherDto.Name.ToLower().Trim();
 
-            if (allPublishers.Any(p => p.Name.ToLower().Trim() == publisherName))
+            var foundPublisher = await _publishersRepository.FirstOrDefaultAsync(p => p.Name.ToLower().Trim() == publisherName);
+            if (foundPublisher is not null)
             {
                 throw new NotUniquePublisherException($"Name {addPublisherDto.Name} is already taken by another publisher");
             }
@@ -66,7 +66,8 @@ namespace Bookstore.BusinessLogic.Services
                 throw new PublisherNotFoundException("Specified publisher does not exist");
             }
 
-            if (_booksRepository.GetAll().FirstOrDefault(b => b.Publisher.Id == deletePublisherDto.Id) is not null)
+            var foundBook = _booksRepository.FirstOrDefaultAsync(b => b.Publisher.Id == deletePublisherDto.Id);
+            if (foundBook is not null)
             {
                 throw new PublisherHasBooksException("You can't delete publisher that has books");
             }

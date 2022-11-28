@@ -1,6 +1,6 @@
 # 📚 Bookstore
 
-Web API and a Blazor WASM app for managing a bookstore.
+Web API and a Blazor WASM UI for managing a bookstore.
 Project for visual programming course at PUT.
 
 # Technologies
@@ -15,8 +15,7 @@ Project for visual programming course at PUT.
 - AutoFixture
 - Moq
 - Blazor
-- HTML 5
-- CSS 3
+- Refit
 - Docker
 
 # Setup

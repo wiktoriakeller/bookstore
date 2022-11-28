@@ -6,10 +6,12 @@ using Bookstore.Core.Dtos.Books;
 using Bookstore.Core.Dtos.Publishers;
 using Bookstore.Core.Entities;
 using Bookstore.Interfaces.Repositories;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 
 namespace Bookstore.UnitTests.BusinessLogic.Services
 {
+    [ExcludeFromCodeCoverage]
     public class PublishersServiceTests
     {
         [Theory]

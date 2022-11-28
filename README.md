@@ -1,6 +1,7 @@
 # 📚 Bookstore
 
-Web API and a Blazor client app for a bookstore.
+Web API and a Blazor WASM app for managing a bookstore.
+Project for visual programming course at PUT.
 
 # Technologies
 
@@ -9,6 +10,10 @@ Web API and a Blazor client app for a bookstore.
 - FluentValidation
 - AutoMapper
 - Entity Framework Core
+- xUnit
+- FluentAssertions
+- AutoFixture
+- Moq
 - Blazor
 - HTML 5
 - CSS 3

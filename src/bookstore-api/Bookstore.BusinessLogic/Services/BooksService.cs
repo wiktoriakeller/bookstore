@@ -25,7 +25,7 @@ namespace Bookstore.BusinessLogic.Services
 
         public IEnumerable<BookDto> GetAllBooks()
         {
-            var allBooks = _booksRepository.GetAll();
+            var allBooks = _booksRepository.GetAll().OrderBy(b => b.PublishDate);
             return _mapper.Map<IEnumerable<BookDto>>(allBooks);
         }
 
@@ -38,8 +38,11 @@ namespace Bookstore.BusinessLogic.Services
             }
 
             var filteredBooks = _booksRepository
-                .GetWhere(b => b.Title.ToLower().Contains(titleSearch)
-                && b.PublishDate.Date >= booksFiltersDto.PublishDateStart.Date && b.PublishDate.Date <= booksFiltersDto.PublishDateEnd.Date);
+                .GetWhere(b =>
+                    b.Title.ToLower().Contains(titleSearch)
+                    && b.PublishDate.Date >= booksFiltersDto.PublishDateStart.Date
+                    && b.PublishDate.Date <= booksFiltersDto.PublishDateEnd.Date)
+                .OrderBy(b => b.PublishDate);
 
             return _mapper.Map<IEnumerable<BookDto>>(filteredBooks);
         }

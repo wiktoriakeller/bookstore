@@ -66,7 +66,7 @@ namespace Bookstore.BusinessLogic.Services
                 throw new PublisherNotFoundException("Specified publisher does not exist");
             }
 
-            var foundBook = _booksRepository.FirstOrDefaultAsync(b => b.Publisher.Id == deletePublisherDto.Id);
+            var foundBook = await _booksRepository.FirstOrDefaultAsync(b => b.PublisherId == deletePublisherDto.Id);
             if (foundBook is not null)
             {
                 throw new PublisherHasBooksException("You can't delete publisher that has books");

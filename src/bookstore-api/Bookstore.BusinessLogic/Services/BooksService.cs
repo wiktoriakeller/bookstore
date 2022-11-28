@@ -54,8 +54,7 @@ namespace Bookstore.BusinessLogic.Services
                 throw new NotUniqueBookException($"Title {addBookDto.Title} is already taken by another book");
             }
 
-            var allPublishers = _publishersRepository.GetAll();
-            var selectedPublisher = allPublishers.FirstOrDefault(p => p.Id == addBookDto.PublisherId);
+            var selectedPublisher = await _publishersRepository.FirstOrDefaultAsync(p => p.Id == addBookDto.PublisherId);
             if (selectedPublisher is null)
             {
                 throw new PublisherNotFoundException($"Specified publisher does not exist");
